@@ -152,29 +152,29 @@ namespace Lab5.Task2
         public static void Run()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("\n=== СТВОРЕННЯ ОБ'ЄКТІВ (Робота конструкторів) ===");
+            Console.WriteLine("\nСТВОРЕННЯ ОБ'ЄКТІВ (Робота конструкторів)");
 
-            Console.WriteLine("\n--- 1. Створення Персон ---");
+            Console.WriteLine("\n1. Створення Персон");
             Person p1 = new Person();
             Person p2 = new Person("Максим");
             Person p3 = new Person("Анна", 22);
 
-            Console.WriteLine("\n--- 2. Створення Службовців ---");
+            Console.WriteLine("\n2. Створення Службовців");
             Employee e1 = new Employee();
             Employee e2 = new Employee("Олексій", 30);
             Employee e3 = new Employee("Ірина", 28, 15000);
 
-            Console.WriteLine("\n--- 3. Створення Робітників ---");
+            Console.WriteLine("\n3. Створення Робітників");
             Worker w1 = new Worker();
             Worker w2 = new Worker("Петро", 40, 20000);
             Worker w3 = new Worker("Степан", 45, 25000, "Слюсар");
 
-            Console.WriteLine("\n--- 4. Створення Інженерів ---");
+            Console.WriteLine("\n4. Створення Інженерів");
             Engineer eng1 = new Engineer();
             Engineer eng2 = new Engineer("Ольга", 32, 40000);
             Engineer eng3 = new Engineer("Віталій", 35, 50000, "АЕС");
 
-            Console.WriteLine("\n=== ЗНИЩЕННЯ ОБ'ЄКТІВ (Робота деструкторів) ===");
+            Console.WriteLine("\nЗНИЩЕННЯ ОБ'ЄКТІВ (Робота деструкторів)");
             Console.WriteLine("Викликаємо Збирача сміття (Garbage Collector)...");
 
            

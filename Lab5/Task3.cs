@@ -2,114 +2,143 @@
 
 namespace Lab5.Task3
 {
-    abstract class Function
+    abstract class Product
     {
-        public abstract double Calculate(double x);
-        public abstract void PrintInfo(double x);
+      
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public int TargetAge { get; set; }
+
+        public Product(string name, double price, int targetAge)
+        {
+            Name = name;
+            Price = price;
+            TargetAge = targetAge;
+        }
+
+       
+        public abstract void PrintInfo();
+        public abstract bool IsMatchType(string searchType);
     }
 
-    class Line : Function
+   
+    class Toy : Product
     {
-        public double A { get; set; }
-        public double B { get; set; }
+        public string Manufacturer { get; set; }
+        public string Material { get; set; }
 
-        public Line(double a, double b)
+        public Toy(string name, double price, int targetAge, string manufacturer, string material)
+            : base(name, price, targetAge)
         {
-            A = a;
-            B = b;
+            Manufacturer = manufacturer;
+            Material = material;
         }
 
-        public override double Calculate(double x)
+        public override void PrintInfo()
         {
-            return A * x + B;
+            Console.WriteLine($"[Іграшка] Назва: {Name}, Ціна: {Price} грн, Вік: {TargetAge}+, Виробник: {Manufacturer}, Матеріал: {Material}");
         }
 
-        public override void PrintInfo(double x)
+        public override bool IsMatchType(string searchType)
         {
-            Console.WriteLine($"[Пряма]     y = {A}*x + {B}. \tПри x = {x}, y = {Calculate(x)}");
-        }
-    }
-
-    class Quadratic : Function
-    {
-        public double A { get; set; }
-        public double B { get; set; }
-        public double C { get; set; }
-
-        public Quadratic(double a, double b, double c)
-        {
-            A = a;
-            B = b;
-            C = c;
-        }
-
-        public override double Calculate(double x)
-        {
-            return A * Math.Pow(x, 2) + B * x + C;
-        }
-
-        public override void PrintInfo(double x)
-        {
-            Console.WriteLine($"[Парабола]  y = {A}*x^2 + {B}*x + {C}. \tПри x = {x}, y = {Calculate(x)}");
+            
+            return searchType.ToLower() == "іграшка";
         }
     }
 
-    class Hyperbola : Function
+   
+    class Book : Product
     {
-        public double K { get; set; }
+        public string Author { get; set; }
+        public string Publisher { get; set; }
 
-        public Hyperbola(double k)
+        public Book(string name, double price, int targetAge, string author, string publisher)
+            : base(name, price, targetAge)
         {
-            K = k;
+            Author = author;
+            Publisher = publisher;
         }
 
-        public override double Calculate(double x)
+        public override void PrintInfo()
         {
-            if (x == 0) return double.NaN;
-            return K / x;
+            Console.WriteLine($"[Книга] Назва: «{Name}», Автор: {Author}, Ціна: {Price} грн, Вік: {TargetAge}+, Видавництво: {Publisher}");
         }
 
-        public override void PrintInfo(double x)
+        public override bool IsMatchType(string searchType)
         {
-            if (x == 0)
-            {
-                Console.WriteLine($"[Гіпербола] y = {K}/x. \tПри x = {x}, значення не існує (ділення на нуль)!");
-            }
-            else
-            {
-                Console.WriteLine($"[Гіпербола] y = {K}/x. \tПри x = {x}, y = {Calculate(x):F2}");
-            }
+            return searchType.ToLower() == "книга";
         }
     }
 
+   
+    class SportsEquipment : Product
+    {
+        public string Manufacturer { get; set; }
+
+        public SportsEquipment(string name, double price, int targetAge, string manufacturer)
+            : base(name, price, targetAge)
+        {
+            Manufacturer = manufacturer;
+        }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"[Спорт-інвентар] Назва: {Name}, Ціна: {Price} грн, Вік: {TargetAge}+, Виробник: {Manufacturer}");
+        }
+
+        public override bool IsMatchType(string searchType)
+        {
+            return searchType.ToLower() == "спорт-інвентар" || searchType.ToLower() == "спорт";
+        }
+    }
+
+   
     public class Task3
     {
         public static void Run()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("\n=== Завдання 3: Математичні функції ===");
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("\nЗавдання 3.7: База товарів");
 
-            double x = 2.5;
-
-            Function[] functions = new Function[]
+          
+            Product[] database = new Product[]
             {
-                new Line(2, 3),
-                new Quadratic(1, -2, 5),
-                new Hyperbola(10),
-                new Line(-1, 10),
-                new Hyperbola(5)
+                new Toy("Конструктор LEGO", 1500, 6, "LEGO Group", "Пластик"),
+                new Book("Гаррі Поттер і філософський камінь", 450, 10, "Дж. К. Роулінг", "А-БА-БА-ГА-ЛА-МА-ГА"),
+                new SportsEquipment("Футбольний м'яч", 800, 7, "Nike"),
+                new Toy("М'який Ведмідь", 600, 3, "KidsToys", "Плюш"),
+                new Book("Крос-платформенне програмування на C#", 900, 16, "Троєлсен", "Вільямс")
             };
 
-            Console.WriteLine($"Кількість функцій у масиві (n) = {functions.Length}");
-            Console.WriteLine($"\n--- Обчислення значень у точці x = {x} ---");
-
-            foreach (Function func in functions)
+           
+            Console.WriteLine("\nПовна інформація про всі товари");
+            foreach (Product item in database)
             {
-                func.PrintInfo(x);
+                item.PrintInfo(); 
             }
 
-            Console.WriteLine("\n--- Перевірка надійності (x = 0) ---");
-            functions[2].PrintInfo(0);
+            
+            Console.WriteLine("\nПошук товарів");
+            Console.Write("Введіть тип товару для пошуку (Іграшка, Книга, Спорт-інвентар): ");
+            string searchType = Console.ReadLine();
+
+            Console.WriteLine($"\nРезультати пошуку для типу «{searchType}»:");
+            bool found = false;
+
+            foreach (Product item in database)
+            {
+                if (item.IsMatchType(searchType))
+                {
+                    item.PrintInfo();
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("Товарів такого типу не знайдено.");
+            }
 
             Console.WriteLine("\nНатисніть Enter для повернення...");
             Console.ReadLine();

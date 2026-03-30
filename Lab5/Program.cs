@@ -14,7 +14,7 @@ namespace Lab5
                 Console.WriteLine("Оберіть номер завдання або 0 для виходу:");
                 Console.WriteLine("1. Завдання 1.2 (Ієрархія класів)");
                 Console.WriteLine("2. Завдання 2.2 (Конструктори та деструктори)");
-                Console.WriteLine("3. Завдання 3.2 (Абстрактний клас Function)");
+                Console.WriteLine("3. Завдання 3.7 (Пошук Іграшок)");
                 Console.WriteLine("4. Завдання 4 (Частковий запечатаний клас Trapeze)");
                 Console.Write("Ваш вибір: ");
 

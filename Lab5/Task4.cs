@@ -7,7 +7,7 @@ namespace Lab5.Task4
         public static void Run()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("\n=== Завдання 4: Запечатаний частковий клас ===");
+            Console.WriteLine("\nЗавдання 4: Запечатаний частковий клас");
 
            
             Trapeze t = new Trapeze(5, 7, 4, 1);
